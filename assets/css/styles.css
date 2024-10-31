@@ -1,0 +1,139 @@
+body {
+  background-color: #3669a0;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+}
+
+.container {
+  background-color: white;
+  padding: 5%;
+  border-radius: 15px;
+  margin: 1%;
+}
+
+.titulo {
+  color: #3669a0;
+}
+
+.frase {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.frase .palavra {
+  padding: 10px 15px;
+  margin: 5px;
+  background-color: gray;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  user-select: none;
+  box-shadow: 3px 3px 1px #12395b;
+}
+
+.zona-soltar {
+  min-height: 90px;
+  border: 1px dashed #ffffff;
+  border-radius: 15px;
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #3669a0;
+  color: white;
+}
+
+.alerta {
+  display: none;
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 5px;
+  color: white;
+  text-align: center;
+}
+
+.alerta-sucesso {
+  background-color: #28a745;
+}
+
+.alerta-erro {
+  background-color: #dc3545;
+}
+
+#proximaFrase {
+  display: none;
+}
+
+.palavra {
+  margin: 1%;
+  padding: 1%;
+  padding-inline: 2%;
+  border-radius: 10px;
+  border: none;
+}
+
+.certo {
+  background-color: #28a745;
+  color: white;
+}
+
+.errado {
+  background-color: #dc3545;
+  color: white;
+}
+
+.infografico-container h2 {
+  font-weight: bold;
+  color: #003366;
+  margin-bottom: 10px;
+}
+
+.infografico-container .subtitulo {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+
+.tabela-verbo {
+  background-color: #f7f9fc;
+  border-radius: 8px;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.tabela-verbo thead {
+  background-color: #003366;
+  color: #fff;
+}
+
+.tabela-verbo th,
+.tabela-verbo td {
+  padding: 15px;
+  text-align: center;
+  font-size: 16px;
+}
+
+.tabela-verbo tbody tr {
+  border-bottom: 1px solid #ddd;
+}
+
+.tabela-verbo tbody tr:hover {
+  background-color: #e0f0ff;
+}
+
+
+.modal-content {
+  border-radius: 15px;
+  padding: 20px;
+}
+
+.modal-header,
+.modal-footer {
+  border: none;
+}
+
+.modal-title {
+  font-size: 24px;
+  color: #003366;
+}
