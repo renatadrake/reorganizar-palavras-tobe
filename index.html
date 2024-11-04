@@ -10,27 +10,37 @@
 </head>
 <body>
     <div class="container">
-        <h1 class="titulo">Organize a Frase</h1>
-        <div id="zonaDeSoltar" class="zona-soltar"></div>
-        <div class="status">
-            <p id="contadorMovimentos" class="contador">Movimentos: 0</p>
-            <p id="contadorTempo" class="contador">Tempo: 00:00</p>
+        <div class="status row">
+            <img src="assets/img/organize-img.jpg" class="img-fluid titulo" alt="titulo organize the words">
+            <div class="estiloContador row col" >
+                <div class="col move"> <img src="assets/img/move.png" class="img-fluid" alt="icone contador de movimento"></div>
+                <span id="contadorMovimentos" class="contador col">0</span>
+            </div>
+            <div class="estiloContador row col">
+                <div class="col time"> <img src="assets/img/time.png" class="img-fluid" alt="icone contador de tempo"></div>
+                <span id="contadorTempo" class="contador col"> 00:00</span>
+            </div>
         </div>
-        <button id="verificar" class="btn btn-primary mt-3">Verificar</button>
-        <button id="proximaFrase" class="btn btn-success mt-3" style="display: none;">Próxima Frase</button>
+        <div id="zonaDeSoltar" class="zona-soltar"></div>
+       
+        <button id="verificar" class="btn btn-primary">Correction</button>
+        <button id="proximaFrase" class="btn btn-success" style="display: none;"> Next Sentence </button>
 
         <!-- Modal Feedback Final -->
         <div id="modalFeedback" class="modal fade" tabindex="-1" role="dialog">
-            <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Pontuação Final</h5>
+                        <h5 class="modal-title">
+                            Congratulations</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
+                        <img src="assets/img/" class="img-fluid gif-modal" alt="titulo organize the words">
                         <p id="textoFeedbackFinal"></p>
+                        
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
@@ -41,16 +51,15 @@
 
         <!-- Modal Tela Inicial -->
         <div id="modalInicio" class="modal fade" tabindex="-1" role="dialog">
-            <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Bem-vindo ao Jogo de Frases</h5>
+                       <img src="assets/img/Organizewords.gif" class="img-fluid gif-modal" alt="titulo organize the words">
                     </div>
                     <div class="modal-body">
                         <p>Organize as palavras embaralhadas para formar a frase correta. Tente usar o mínimo de movimentos e tempo possível para ganhar mais pontos!</p>
-                        
-
-                        <div class="infografico-container">
+                    
+                        <div class="infografico-container d-none">
                             <h2 class="text-center">Aprenda o Verbo "To Be"</h2>
                             <p class="text-center subtitulo">Uma rápida visão das formas do verbo "to be"</p>
                             <table class="table tabela-verbo">
@@ -90,11 +99,11 @@
                                 </tbody>
                             </table>
                         </div>
-                        <p>Quando estiver pronto, clique em "Começar" para iniciar o jogo.</p>
+                        <p><strong>Quando estiver pronto, clique em "Começar" para iniciar o jogo.</strong> </p>
                     </div>
-                    <div class="modal-footer">
+          
                         <button id="btnComecar" type="button" class="btn btn-primary" data-dismiss="modal">Começar</button>
-                    </div>
+                    
                 </div>
             </div>
         </div>

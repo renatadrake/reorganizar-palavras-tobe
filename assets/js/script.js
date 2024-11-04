@@ -45,12 +45,12 @@
     var minutos = Math.floor(diferenca / 60000);
     var segundos = Math.floor((diferenca % 60000) / 1000);
     $("#contadorTempo").text(
-      "Tempo: " +
-        (minutos < 10 ? "0" : "") +
-        minutos +
-        ":" +
-        (segundos < 10 ? "0" : "") +
-        segundos
+      " " +
+      (minutos < 10 ? "0" : "") +
+      minutos +
+      ":" +
+      (segundos < 10 ? "0" : "") +
+      segundos
     );
   }
 
@@ -60,47 +60,49 @@
   }
 
   function atualizarContadorMovimentos() {
-    $("#contadorMovimentos").text("Movimentos: " + movimentos);
+    $("#contadorMovimentos").text(movimentos);
   }
 
-   // Função de feedback visual para posição correta e incorreta
 
-
-function verificarFrase() {
+  function verificarFrase() {
     var fraseOriginal = frases[indiceFraseAtual];
     var palavrasUsuario = $("#zonaDeSoltar .palavra")
-        .map(function () {
-            return $(this).text();
-        })
-        .get()
-        .join(" ");
+      .map(function () {
+        return $(this).text();
+      })
+      .get()
+      .join(" ");
 
     if (palavrasUsuario === fraseOriginal) {
-        mostrarFeedback(
-            "Correto! Você formou a frase corretamente.",
-            "alerta-sucesso",
-            true
-        );
-        $("#audio-acerto")[0].play(); 
+      mostrarFeedback(
+        "Correto! Você formou a frase corretamente.",
+        "alerta-sucesso",
+        true
+      );
+      $("#audio-acerto")[0].play();
     } else {
-        mostrarFeedback("Incorreto! Tente novamente.", "alerta-erro", false);
-        $("#audio-errado")[0].play();
-       
+      mostrarFeedback("Incorreto! Tente novamente.", "alerta-erro", false);
+      $("#audio-errado")[0].play();
+
     }
-    verificarPosicaoPalavras(); 
+    verificarPosicaoPalavras();
     function verificarPosicaoPalavras() {
-        var fraseOriginal = frases[indiceFraseAtual].split(" ");
-        $("#zonaDeSoltar .palavra").each(function (index) {
-            if ($(this).text() === fraseOriginal[index]) {
-                $(this).addClass("certo").removeClass("errado");
-            } else {
-                $(this).addClass("errado").removeClass("certo");
-            }
-        });
-    }// Chama a função para aplicar as classes .certo e .errado
-}
-
-
+      var fraseOriginal = frases[indiceFraseAtual].split(" ");
+      $("#zonaDeSoltar .palavra").each(function (index) {
+        if ($(this).text() === fraseOriginal[index]) {
+          $(this).addClass("certo").removeClass("errado");
+          setTimeout(() => {
+            $(this).removeClass("certo");
+          }, "4000");
+        } else {
+          $(this).addClass("errado").removeClass("certo");
+          setTimeout(() => {
+            $(this).removeClass("errado");
+          }, "4000");
+        }
+      });
+    }
+  }
 
   function mostrarFeedback(mensagem, tipo, correto) {
     var alerta = $("<div>")
@@ -149,7 +151,6 @@ function verificarFrase() {
 
     return estrelas;
   }
-
   function finalizarJogo() {
     var estrelas = calcularPontuacao();
 
@@ -157,10 +158,30 @@ function verificarFrase() {
 
     $("#modalFeedback").modal("show");
     $("#textoFeedbackFinal").text(
-      "Parabéns! Você completou todas as frases com " + estrelas + " estrelas!"
+      "Parabéns! Você organizou a frase direitinho e ganhou " + estrelas + " estrela(s)!"
     );
-  }
 
+    $("#modalFeedback .gif-modal").remove();
+
+    var img = $('<img>');
+    img.addClass('gif-modal img-fluid');
+    switch (estrelas) {
+      case 1:
+        img.attr('src', 'assets/img/estrela.gif');
+        break;
+      case 2:
+        img.attr('src', 'assets/img/estrela2.gif');
+        break;
+      case 3:
+        img.attr('src', 'assets/img/estrela3.gif');
+        break;
+      default:
+
+        break;
+    }
+
+    $("#modalFeedback .modal-body").prepend(img);
+  }
   function proximaFrase() {
     indiceFraseAtual++;
     if (indiceFraseAtual < frases.length) {
