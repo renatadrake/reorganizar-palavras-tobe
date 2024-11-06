@@ -13,7 +13,10 @@
 
   function embaralharFrase(frase) {
     var palavras = frase.split(" ");
-    palavras = palavras.sort(() => 0.5 - Math.random());
+
+    do {
+      palavras = palavras.sort(() => 0.5 - Math.random());
+    } while (palavras.join(" ") === frase);
 
     $("#zonaDeSoltar").empty();
 
@@ -25,13 +28,20 @@
       $("#zonaDeSoltar").append(span);
     });
 
-    $("#zonaDeSoltar")
-      .sortable({
-        update: function () {
-          registrarMovimento();
-        },
-      })
-      .disableSelection();
+    $("#zonaDeSoltar").sortable({
+      start: function (event, ui) {
+        ui.item.css("box-shadow", "0px 4px 8px rgba(0, 0, 0, 0.5)");
+      },
+      stop: function (event, ui) {
+        ui.item.css("box-shadow", "none");
+      },
+      update: function () {
+        registrarMovimento();
+        verificarFrase();
+      },
+      tolerance: "pointer",
+      cursor: "move"
+    });
   }
 
   function iniciarTempo() {
@@ -63,7 +73,6 @@
     $("#contadorMovimentos").text(movimentos);
   }
 
-
   function verificarFrase() {
     var fraseOriginal = frases[indiceFraseAtual];
     var palavrasUsuario = $("#zonaDeSoltar .palavra")
@@ -75,30 +84,32 @@
 
     if (palavrasUsuario === fraseOriginal) {
       mostrarFeedback(
-        "Correto! Você formou a frase corretamente.",
+        "Congratulations! You arranged the sentence correctly.",
         "alerta-sucesso",
         true
       );
       $("#audio-acerto")[0].play();
     } else {
-      mostrarFeedback("Incorreto! Tente novamente.", "alerta-erro", false);
+      mostrarFeedback("Incorrect! Try again", "alerta-erro", false);
       $("#audio-errado")[0].play();
 
     }
+
     verificarPosicaoPalavras();
     function verificarPosicaoPalavras() {
       var fraseOriginal = frases[indiceFraseAtual].split(" ");
+
       $("#zonaDeSoltar .palavra").each(function (index) {
-        if ($(this).text() === fraseOriginal[index]) {
-          $(this).addClass("certo").removeClass("errado");
-          setTimeout(() => {
-            $(this).removeClass("certo");
-          }, "4000");
+        var textoPalavra = $(this).text();
+        var posicaoCorreta = fraseOriginal.indexOf(textoPalavra);
+
+        if (index === posicaoCorreta) {
+          $(this).addClass("certo").removeClass("errado quase");
+
+        } else if (index === posicaoCorreta - 1 || index === posicaoCorreta + 1) {
+          $(this).addClass("quase").removeClass("certo errado");
         } else {
-          $(this).addClass("errado").removeClass("certo");
-          setTimeout(() => {
-            $(this).removeClass("errado");
-          }, "4000");
+          $(this).addClass("errado").removeClass("certo quase");
         }
       });
     }
@@ -158,7 +169,7 @@
 
     $("#modalFeedback").modal("show");
     $("#textoFeedbackFinal").text(
-      "Parabéns! Você organizou a frase direitinho e ganhou " + estrelas + " estrela(s)!"
+      "Parabéns! Você organizou a frase corretamente e ganhou " + estrelas + " estrela(s)!"
     );
 
     $("#modalFeedback .gif-modal").remove();
@@ -182,24 +193,40 @@
 
     $("#modalFeedback .modal-body").prepend(img);
   }
+
   function proximaFrase() {
-    indiceFraseAtual++;
-    if (indiceFraseAtual < frases.length) {
+    if (indiceFraseAtual < frases.length - 1) {
+      indiceFraseAtual++;
       iniciarJogo();
       $("#proximaFrase").hide();
     } else {
-      finalizarJogo();
+      mostrarAlertaFimDoJogo();
     }
+  }
+
+  function iniciarJogo() {
+    $("#zonaDeSoltar").empty();
+    movimentos = 0;
+    atualizarContadorMovimentos();
+    iniciarTempo();
+    embaralharFrase(frases[indiceFraseAtual]);
+  }
+
+  function mostrarAlertaFimDoJogo() {
+    var alertaFim = $("<div>")
+      .addClass("alerta alerta-sucesso")
+      .text("Finish");
+
+    $("#proximaFrase").addClass("disabled");
+
+    $(".container").append(alertaFim);
+    alertaFim.fadeIn();
   }
 
   $(document).ready(function () {
     $("#modalInicio").modal("show");
     $("#btnComecar").click(function () {
       iniciarJogo();
-    });
-
-    $("#verificar").click(function () {
-      verificarFrase();
     });
 
     $("#proximaFrase").click(function () {

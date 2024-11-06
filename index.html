@@ -1,6 +1,6 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,11 +8,12 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
+
 <body>
     <div class="container">
         <div class="status row">
             <img src="assets/img/organize-img.jpg" class="img-fluid titulo" alt="titulo organize the words">
-            <div class="estiloContador row col" >
+            <div class="estiloContador row col">
                 <div class="col move"> <img src="assets/img/move.png" class="img-fluid" alt="icone contador de movimento"></div>
                 <span id="contadorMovimentos" class="contador col">0</span>
             </div>
@@ -22,8 +23,6 @@
             </div>
         </div>
         <div id="zonaDeSoltar" class="zona-soltar"></div>
-       
-        <button id="verificar" class="btn btn-primary">Correction</button>
         <button id="proximaFrase" class="btn btn-success" style="display: none;"> Next Sentence </button>
 
         <!-- Modal Feedback Final -->
@@ -40,7 +39,6 @@
                     <div class="modal-body">
                         <img src="assets/img/" class="img-fluid gif-modal" alt="titulo organize the words">
                         <p id="textoFeedbackFinal"></p>
-                        
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
@@ -54,56 +52,16 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                       <img src="assets/img/Organizewords.gif" class="img-fluid gif-modal" alt="titulo organize the words">
+                        <img src="assets/img/Organizewords.gif" class="img-fluid gif-modal"
+                            alt="titulo organize the words">
                     </div>
                     <div class="modal-body">
-                        <p>Organize as palavras embaralhadas para formar a frase correta. Tente usar o mínimo de movimentos e tempo possível para ganhar mais pontos!</p>
-                    
-                        <div class="infografico-container d-none">
-                            <h2 class="text-center">Aprenda o Verbo "To Be"</h2>
-                            <p class="text-center subtitulo">Uma rápida visão das formas do verbo "to be"</p>
-                            <table class="table tabela-verbo">
-                                <thead>
-                                    <tr>
-                                        <th>Pessoa</th>
-                                        <th>Forma</th>
-                                        <th>Exemplo</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Eu (I)</td>
-                                        <td>am</td>
-                                        <td>I am a student</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Você (You)</td>
-                                        <td>are</td>
-                                        <td>You are learning</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ele/Ela (He/She/It)</td>
-                                        <td>is</td>
-                                        <td>He is here</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Nós (We)</td>
-                                        <td>are</td>
-                                        <td>We are ready</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Eles (They)</td>
-                                        <td>are</td>
-                                        <td>They are happy</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                        <p>Organize as palavras embaralhadas para formar a frase correta. Tente usar o mínimo de
+                            movimentos e tempo possível para ganhar mais estrelas!</p>
                         <p><strong>Quando estiver pronto, clique em "Começar" para iniciar o jogo.</strong> </p>
                     </div>
-          
-                        <button id="btnComecar" type="button" class="btn btn-primary" data-dismiss="modal">Começar</button>
-                    
+                    <button id="btnComecar" type="button" class="btn btn-primary" data-dismiss="modal">Começar</button>
+
                 </div>
             </div>
         </div>
@@ -112,15 +70,15 @@
 
     <audio id="audio-acerto">
         <source src="assets/audio/acerto.mp3" type="audio/mpeg">
-      </audio>
-    
-      <audio id="audio-errado">
-        <source src="assets/audio/erro.mp3" type="audio/mpeg">
-      </audio>
+    </audio>
 
-      <audio id="audio-clique">
+    <audio id="audio-errado">
+        <source src="assets/audio/erro.mp3" type="audio/mpeg">
+    </audio>
+
+    <audio id="audio-clique">
         <source src="assets/audio/clique.mp3" type="audio/mpeg">
-      </audio>
+    </audio>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
@@ -128,4 +86,5 @@
     <script src="assets/js/config.js"></script>
     <script src="assets/js/script.js"></script>
 </body>
+
 </html>
