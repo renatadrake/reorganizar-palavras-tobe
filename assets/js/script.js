@@ -31,16 +31,18 @@
     $("#zonaDeSoltar").sortable({
       start: function (event, ui) {
         ui.item.css("box-shadow", "0px 4px 8px rgba(0, 0, 0, 0.5)");
+        ui.item.css("border", "9px solid #00fdfe");
       },
       stop: function (event, ui) {
         ui.item.css("box-shadow", "none");
+        ui.item.css("border", "none");
       },
       update: function () {
         registrarMovimento();
         verificarFrase();
       },
       tolerance: "pointer",
-      cursor: "move"
+      cursor: "move",
     });
   }
 
@@ -56,11 +58,11 @@
     var segundos = Math.floor((diferenca % 60000) / 1000);
     $("#contadorTempo").text(
       " " +
-      (minutos < 10 ? "0" : "") +
-      minutos +
-      ":" +
-      (segundos < 10 ? "0" : "") +
-      segundos
+        (minutos < 10 ? "0" : "") +
+        minutos +
+        ":" +
+        (segundos < 10 ? "0" : "") +
+        segundos
     );
   }
 
@@ -92,7 +94,6 @@
     } else {
       mostrarFeedback("Incorrect! Try again", "alerta-erro", false);
       $("#audio-errado")[0].play();
-
     }
 
     verificarPosicaoPalavras();
@@ -105,8 +106,10 @@
 
         if (index === posicaoCorreta) {
           $(this).addClass("certo").removeClass("errado quase");
-
-        } else if (index === posicaoCorreta - 1 || index === posicaoCorreta + 1) {
+        } else if (
+          index === posicaoCorreta - 1 ||
+          index === posicaoCorreta + 1
+        ) {
           $(this).addClass("quase").removeClass("certo errado");
         } else {
           $(this).addClass("errado").removeClass("certo quase");
@@ -169,29 +172,44 @@
 
     $("#modalFeedback").modal("show");
     $("#textoFeedbackFinal").text(
-      "Parabéns! Você organizou a frase corretamente e ganhou " + estrelas + " estrela(s)!"
+      "Parabéns! Você organizou a frase corretamente e ganhou " +
+        estrelas +
+        " estrela(s)!"
     );
 
     $("#modalFeedback .gif-modal").remove();
 
-    var img = $('<img>');
-    img.addClass('gif-modal img-fluid');
+    var img = $("<img>");
+    img.addClass("gif-modal img-fluid");
     switch (estrelas) {
       case 1:
-        img.attr('src', 'assets/img/estrela.gif');
+        img.attr("src", "assets/img/estrela.gif");
         break;
       case 2:
-        img.attr('src', 'assets/img/estrela2.gif');
+        img.attr("src", "assets/img/estrela2.gif");
         break;
       case 3:
-        img.attr('src', 'assets/img/estrela3.gif');
+        img.attr("src", "assets/img/estrela3.gif");
         break;
       default:
-
         break;
     }
 
     $("#modalFeedback .modal-body").prepend(img);
+    atualizarTotalEstrelas(estrelas);
+  }
+
+  var totalEstrelas = 0;
+
+  function atualizarTotalEstrelas(estrelasGanhas) {
+    totalEstrelas += estrelasGanhas;
+    $(".totalEstrelas").text(totalEstrelas);
+
+    $(".iconeEstrela").addClass("girar");
+
+    setTimeout(function() {
+      $(".iconeEstrela").removeClass("girar");
+    }, 1000); 
   }
 
   function proximaFrase() {
@@ -213,27 +231,48 @@
   }
 
   function mostrarAlertaFimDoJogo() {
-    var alertaFim = $("<div>")
-      .addClass("alerta alerta-sucesso")
-      .text("Finish");
-
+    var tempoFinal = new Date().getTime();
+    var tempoTotalJogo = Math.floor((tempoFinal - tempoInicial) / 1000); // 
+  
+    $("#totalEstrelas").text(totalEstrelas + " estrela(s)");
+    $("#tempoTotal").text(tempoTotalJogo + " segundos");
+  
     $("#proximaFrase").addClass("disabled");
-
-    $(".container").append(alertaFim);
-    alertaFim.fadeIn();
+  
+    $("#modalFimDoJogo").modal("show");
   }
-
 
   $(".bt-iniciar").click(function () {
     $(".tela-inicial").addClass("d-none");
     $("#modalInicio").modal("show");
     $(".tela-interacao").removeClass("d-none");
+  });
 
-  })
+  function reiniciarJogo() {
+    indiceFraseAtual = 0;
+    movimentos = 0;
+    totalEstrelas = 0;
+  
+    atualizarContadorMovimentos();
+    $(".totalEstrelas").text(totalEstrelas);
+  
+    clearInterval(intervalo); 
+    iniciarTempo();
+
+    $("#proximaFrase").addClass("disabled");
+  
+  
+    $("#zonaDeSoltar").empty(); 
+    $("#proximaFrase").hide(); 
+    $("#modalFimDoJogo").modal("hide"); 
+  
+
+    embaralharFrase(frases[indiceFraseAtual]);
+  }
+  $("#btnReiniciar").on("click", reiniciarJogo);
 
 
   $(document).ready(function () {
-
     $("#btnComecar").click(function () {
       iniciarJogo();
     });
