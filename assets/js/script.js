@@ -223,8 +223,17 @@
     alertaFim.fadeIn();
   }
 
-  $(document).ready(function () {
+
+  $(".bt-iniciar").click(function () {
+    $(".tela-inicial").addClass("d-none");
     $("#modalInicio").modal("show");
+    $(".tela-interacao").removeClass("d-none");
+
+  })
+
+
+  $(document).ready(function () {
+
     $("#btnComecar").click(function () {
       iniciarJogo();
     });

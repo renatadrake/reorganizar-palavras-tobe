@@ -1,23 +1,39 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-
 body {
-  background-color: #28a745;
   display: flex;
   justify-content: center;
-  height: 100vh;
-  font-family: "Inter", sans-serif;
+  font-family: "roboto", sans-serif;
   font-optical-sizing: auto;
+  background-image: url(../img/BG.jpg);
+  justify-content: center;
+  height: 1080px;
+  width: 100vh;
 }
 
-.container {
-  background-image: url(../img/bg.png);
-  background-repeat: no-repeat, repeat;
-  padding: 5%;
-  border-radius: 15px;
-  margin: 1%;
-  height: 707px;
-  box-shadow: 10px 5px 5px #00000063;
+.logo-maior {
+	position: absolute;
+	top: 32%;
+	width: 50%;
+	left: 10%;
 }
+
+.bt-iniciar {
+	background-color: #fff0;
+	border: none;
+	right: 10%;
+	position: absolute;
+	top: 50%;
+	border-radius: 70px;
+}
+
+
+.bt-iniciar .iniciar-imagem {
+  transition: 0.3s; 
+}
+
+.bt-iniciar:hover .iniciar-imagem {
+  content: url('../img/bt_iniciar_hv.png');
+}
+
 
 .titulo {
   width: 175px;
@@ -99,40 +115,14 @@ body {
   margin-bottom: 20px;
 }
 
+.modal-header{
+  background-image: url(../img/topo_menor.png);
+  background-repeat: no-repeat;
 
-.tabela-verbo {
-  background-color: #f7f9fc;
-  border-radius: 8px;
-  border-collapse: separate;
-  border-spacing: 0;
+  justify-content: center;
+  height: 226px;
 }
 
-.tabela-verbo thead {
-  color: black;
-  background-color: #9FEA7C;
-}
-
-.tabela-verbo th,
-.tabela-verbo td {
-  padding: 15px;
-  text-align: center;
-  font-size: 16px;
-}
-
-.tabela-verbo tbody tr {
-  border-bottom: 1px solid #7bf736;
-}
-
-.tabela-verbo tbody tr:hover {
-  background-color: #e0f0ff;
-}
-
-.modal-content {
-  border-radius: 15px;
-  padding: 20px;
-  background-image: url(../img/bg.png);
-  background-repeat: no-repeat, repeat;
-}
 
 .modal-header,
 .modal-footer {
@@ -145,6 +135,10 @@ body {
   text-align: center;
 }
 
+.modal-content {
+	background-color: #daf2f2;
+}
+
 .estiloContador {
   background-color: #9FEA7C;
   margin: 2%;
@@ -155,9 +149,6 @@ body {
   align-items: center;
 }
 
-.img-fluid.gif-modal {
-  border-radius: 20px 20px 0 0px;
-}
 
 .modal-body {
   position: relative;
@@ -165,22 +156,33 @@ body {
   padding: 1rem;
   font-size: 23px;
   margin: 2%;
+  margin-top: 4%;
+  text-align: center;
 }
 
 #btnComecar {
-  background-color: #9ee97b;
-  border: 4px solid black;
-  color: black;
-  border-radius: 10px;
-  padding: 1%;
-  font-size: 23px;
+	background: linear-gradient(to bottom, #66e0ff, #3fadc9);
+	border: 5px solid #3f2d83;
+	color: white;
+	border-radius: 100px;
+	padding: 10px 30px;
+	font-size: 35px;
+	font-family: Arial, sans-serif;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+	transition: all 0.3s ease;
+	width: 50%;
+	margin: 3%;
+	font-weight: bold;
 }
 
 #btnComecar:hover {
-  background-color: #27640a;
-  border: 4px solid white;
-  color: white;
+  background: linear-gradient(to bottom, #3fadc9, #66e0ff); /* Gradiente invertido no hover */
+  cursor: pointer;
 }
+
 
 #verificar {
   background-color: #9ee97b;
